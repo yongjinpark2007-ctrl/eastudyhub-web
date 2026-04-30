@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAstudyhub | 2026 미국 세무사(EA) 합격 문제은행</title>
+    <title>EAstudyHub | 2026 미국 세무사(EA) 합격 문제은행</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* 기존 index.html의 모든 스타일 100% 보존[cite: 2] */
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
@@ -73,7 +72,7 @@
         .email-input { flex: 1; padding: 0.8rem 1.2rem; border: 1px solid #cbd5e1; border-radius: var(--radius-full); outline: none; }
         .btn { padding: 0.8rem 1.8rem; background: var(--primary); color: white; font-weight: 700; border: none; border-radius: var(--radius-full); cursor: pointer; }
 
-        /* --- 이동 및 재디자인된 뉴스 섹션 --- */
+        /* --- 뉴스 섹션 --- */
         .news-board {
             text-align: left;
             margin-top: 2rem;
@@ -82,14 +81,54 @@
         }
         .news-board-title { font-weight: 800; color: var(--gray-800); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
         .news-card {
-            background: #f1f5f9; /* 배경과 대비되도록 연한 그레이 적용 */
+            background: #f1f5f9;
             border-radius: var(--radius-xl);
             padding: 1.2rem;
             border-left: 4px solid var(--primary);
+            transition: box-shadow 0.2s ease;
         }
         .news-card-meta { display: flex; gap: 10px; font-size: 0.8rem; color: var(--gray-600); margin-bottom: 0.4rem; }
         .news-card-title { font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.6rem; line-height: 1.4; }
         .news-card-body { font-size: 0.9rem; color: var(--gray-600); line-height: 1.5; }
+
+        /* --- [신규] 뉴스 카드 클릭 가능한 링크 처리 --- */
+        .news-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+        .news-card-link:hover {
+            transform: translateY(-2px);
+        }
+        .news-card-link:hover .news-card {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* --- [신규] 블로그 전체 보기 버튼 --- */
+        .blog-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            padding: 0.9rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+        .blog-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+        .blog-link-btn i {
+            font-size: 0.9rem;
+        }
 
         .footer { margin-top: 2.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 1.5rem; }
     </style>
@@ -100,12 +139,12 @@
     <div class="bg-blob blob2"></div>
 
     <div class="container">
-        <!-- 상단 영역[cite: 2] -->
+        <!-- 상단 영역 -->
         <div class="badge">
             <i class="fa-solid fa-rocket"></i> COMING SOON · 2026 LAUNCH
         </div>
 
-        <img src="EAStudyHub website logo.png" alt="EAstudyhub Logo" class="logo-img">
+        <img src="EAStudyHub website logo.png" alt="EAstudyHub Logo" class="logo-img">
 
         <h1>EAstudyHub.com</h1>
         <p class="subhead">
@@ -126,7 +165,7 @@
             </ul>
         </div>
 
-        <!-- 출시 알림 신청 폼 (뉴스 위로 배치)[cite: 2] -->
+        <!-- 출시 알림 신청 폼 -->
         <p style="color: #475569; margin-bottom: 1.2rem; font-weight: 600;">
             출시 알림을 신청하고 최신 합격 정보를 받아보세요.
         </p>
@@ -135,27 +174,36 @@
             <button type="submit" class="btn">신청하기</button>
         </form>
 
-        <!-- [이동된 뉴스 섹션] 알림 신청 하단 배치 -->
+        <!-- 뉴스 섹션 + 블로그 링크 [수정됨] -->
         <div class="news-board">
             <div class="news-board-title">
                 <i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> 최신 IRS 세무 뉴스
             </div>
-            <div class="news-card">
-                <div class="news-card-meta">
-                    <span style="font-weight:bold; color:var(--primary);">Tax Tip 2026-36</span>
-                    <span>| 2026.04.30</span>
+            
+            <!-- [수정] 뉴스 카드를 a 태그로 감싸서 클릭 가능하게 -->
+            <a href="/blog/" class="news-card-link">
+                <div class="news-card">
+                    <div class="news-card-meta">
+                        <span style="font-weight:bold; color:var(--primary);">Tax Tip 2026-36</span>
+                        <span>| 2026.04.30</span>
+                    </div>
+                    <div class="news-card-title">내년 세금 보고 준비, 지금 원천징수 점검부터 시작하세요!</div>
+                    <div class="news-card-body">
+                        2025년 신고가 끝난 지금이 내년 세금 폭탄을 피할 최적기입니다. IRS 무료 도구로 원천징수액을 조정하고 실수령액을 최적화하세요.
+                    </div>
                 </div>
-                <div class="news-card-title">내년 세금 보고 준비, 지금 원천징수 점검부터 시작하세요!</div>
-                <div class="news-card-body">
-                    📢 [EA 정보] 2026년 세금 보고 준비, 지금 바로 시작해야 하는 이유안녕하세요, EAstudyhub입니다! 
-                    2025년 세금 신고 기한이 지난 지 얼마 되지 않았지만, IRS에서는 벌써 내년 시즌을 위한 준비를 강조하고 있습니다. 
-                    오늘 도착한 IRS Tax Tip의 핵심 내용을 한국어로 요약해 드립니다.  
-                </div>
-            </div>
+            </a>
+            
+            <!-- [신규] 블로그 전체 글 보기 버튼 -->
+            <a href="/blog/" class="blog-link-btn">
+                <i class="fa-solid fa-book-open"></i>
+                EA 학습 블로그 전체 글 보기
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
         <div class="footer">
-            <span>&copy; 2026 EAstudyhub. All rights reserved.</span>
+            <span>&copy; 2026 EAstudyHub. All rights reserved.</span>
         </div>
     </div>
 </body>
