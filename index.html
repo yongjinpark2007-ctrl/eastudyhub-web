@@ -1,94 +1,165 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAstudyhub | 최신 IRS 세무 뉴스 및 EA 문제은행</title>
-    <!-- 기존 스타일 및 폰트 유지 -->
+    <title>EAstudyhub | 2026 미국 세무사(EA) 합격 문제은행</title>
+    <!-- 기존 메타데이터 및 폰트 유지 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* 기존 index.html의 스타일 유지 */
+        /* 원래 index.html의 모든 스타일을 100% 보존합니다[cite: 2] */
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
             --gray-600: #475569;
             --gray-800: #1e293b;
             --white: #ffffff;
             --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
             --radius-2xl: 1.5rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Pretendard', sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #ffffff 100%);
-            padding: 2rem 1rem;
-            line-height: 1.6;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
         }
+
+        .bg-blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: 0; }
+        .blob1 { width: 500px; height: 500px; background: #c7d2fe; top: -200px; left: -150px; }
+        .blob2 { width: 400px; height: 400px; background: #a5b4fc; bottom: -150px; right: -120px; }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 640px;
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
-            border-radius: var(--radius-2xl);
-            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-2xl);
+            padding: 3rem 2.5rem;
+            text-align: center;
         }
 
-        /* 새롭게 추가된 뉴스 게시판 스타일 */
-        .news-section {
-            margin-top: 3rem;
+        .logo-img { max-width: 320px; width: 100%; height: auto; margin-bottom: 1rem; }
+        .badge { display: inline-flex; align-items: center; gap: 0.4rem; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); color: #4338ca; padding: 0.5rem 1.5rem; border-radius: var(--radius-full); font-size: 0.9rem; font-weight: 700; margin-bottom: 2rem; animation: pulse 2.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(67, 56, 202, 0.3); } 70% { box-shadow: 0 0 0 12px rgba(67, 56, 202, 0); } 100% { box-shadow: 0 0 0 0 rgba(67, 56, 202, 0); } }
+        
+        h1 { font-size: 1.7rem; font-weight: 800; background: linear-gradient(135deg, #1e3a8a, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.6rem; }
+        .subhead { font-size: 1.15rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 1.8rem; }
+        .highlight { background: linear-gradient(to top, #bfdbfe 40%, transparent 40%); font-weight: 800; color: #1e40af; }
+
+        /* --- 새롭게 추가된 뉴스 게시판 스타일 --- */
+        .news-board {
             text-align: left;
+            margin: 2rem 0;
+            padding-top: 2rem;
+            border-top: 2px dashed #cbd5e1;
         }
-
+        .news-board-title { font-weight: 800; color: var(--gray-800); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; }
         .news-card {
             background: var(--white);
-            border-radius: 1rem;
+            border-radius: var(--radius-xl);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
             border-left: 5px solid var(--primary);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
         }
+        .news-card:hover { transform: translateY(-3px); }
+        .news-card-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem; }
+        .news-card-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.8rem; line-height: 1.4; }
+        .news-card-body { font-size: 0.95rem; color: var(--gray-600); line-height: 1.6; }
 
-        .news-date { font-size: 0.85rem; color: var(--gray-600); }
-        .news-title { font-size: 1.2rem; font-weight: 800; color: var(--primary-dark); margin: 0.5rem 0; }
-        .news-content { font-size: 0.95rem; color: var(--gray-800); }
-        
-        .badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 0.2rem 0.8rem;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+        /* 기존 요소 스타일[cite: 2] */
+        .features { text-align: left; background: var(--white); border-radius: var(--radius-xl); padding: 1.5rem 1.8rem; margin: 2rem 0; box-shadow: var(--shadow-md); border: 1px solid #e2e8f0; }
+        .features-title { font-weight: 700; color: var(--gray-800); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+        ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+        li { display: flex; gap: 0.7rem; font-size: 0.95rem; color: var(--gray-600); }
+        li i { color: var(--primary); }
+
+        .email-form { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+        .email-input { flex: 1; padding: 0.8rem 1.2rem; border: 1px solid #cbd5e1; border-radius: var(--radius-full); outline: none; }
+        .btn { padding: 0.8rem 1.8rem; background: var(--primary); color: white; font-weight: 700; border: none; border-radius: var(--radius-full); cursor: pointer; }
+        .footer { margin-top: 2.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 1.5rem; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- 기존 헤더 로고 및 소개 섹션 -->
-        <h1>EAstudyhub.com</h1>
-        <p>미국 세무사 시험 합격의 지름길</p>
 
-        <!-- 새롭게 추가된 뉴스 게시판 섹션 -->
-        <div class="news-section">
-            <h2 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-bullhorn"></i> 최신 IRS 세무 뉴스</h2>
-            
-            <!-- 게시물 1: 방금 번역한 내용 -->
+<body>
+    <div class="bg-blob blob1"></div>
+    <div class="bg-blob blob2"></div>
+
+    <div class="container">
+        <!-- 기존 상단 배지 및 로고[cite: 2] -->
+        <div class="badge">
+            <i class="fa-solid fa-rocket"></i> COMING SOON · 2026 LAUNCH
+        </div>
+
+        <img src="EAStudyHub website logo.png" alt="EAstudyhub Logo" class="logo-img">
+
+        <h1>EAstudyhub.com</h1>
+        <p class="subhead">
+            미국 공인 세무사(EA) 시험 합격을 위한<br>
+            <span class="highlight">가장 완벽한 한글 해설 문제은행</span> 플랫폼[cite: 2]
+        </p>
+
+        <!-- [뉴스 게시판 섹션] 이메일 뉴스를 여기에 업데이트하세요 -->
+        <div class="news-board">
+            <div class="news-board-title">
+                <i class="fa-solid fa-newspaper" style="color: var(--primary);"></i> 최신 IRS 세무 뉴스
+            </div>
             <div class="news-card">
-                <div class="badge">Tax Tip 2026-36</div>
-                <div class="news-date">2026년 4월 30일</div>
-                <div class="news-title">내년 세금 보고 준비, 지금 원천징수 점검부터 시작하세요!</div>
-                <div class="news-content">
-                    2025년 세금 신고가 끝났지만, 내년의 '세금 폭탄'을 피하기 위해 지금 바로 원천징수액(Withholding)을 확인하는 것이 중요합니다. IRS의 무료 계산기를 사용하여 실수령액을 최적화하세요.[cite: 1]
+                <div class="news-card-meta">
+                    <span><i class="fa-solid fa-tag"></i> Tax Tip 2026-36</span>
+                    <span>2026.04.30</span>
                 </div>
-                <a href="#" style="color: var(--primary); font-size: 0.9rem; text-decoration: none; font-weight: bold; display: block; margin-top: 1rem;">더 읽어보기 →</a>
+                <div class="news-card-title">내년 세금 보고 준비, 지금 원천징수 점검부터 시작하세요!</div>
+                <div class="news-card-body">
+                    2025년 세금 보고가 끝난 지금이 내년 세금 폭탄을 피할 최적기입니다. IRS의 무료 추정 도구를 통해 급여 원천징수액을 미리 조정하고 실수령액을 최적화하세요.[cite: 1]
+                </div>
             </div>
         </div>
 
-        <!-- 기존 출시 알림 신청 폼 및 푸터 유지 -->
+        <!-- 기존 특징 리스트[cite: 2] -->
+        <div class="features">
+            <div class="features-title">
+                <i class="fa-solid fa-circle-info"></i> 주요 업데이트 사항
+            </div>
+            <ul>
+                <li><i class="fa-solid fa-circle-check"></i> 2026년 주관사 변경(PSI) 시험 방식 완벽 반영[cite: 2]</li>
+                <li><i class="fa-solid fa-circle-check"></i> 2025년 최신 세법(Tax Law) 업데이트 완료[cite: 2]</li>
+                <li><i class="fa-solid fa-circle-check"></i> 자세한 한국어 해설 및 합격 팁 제공[cite: 2]</li>
+                <li><i class="fa-solid fa-circle-check"></i> 실전과 동일한 CBT 환경 구축[cite: 2]</li>
+            </ul>
+        </div>
+
+        <p style="color: #475569; margin-bottom: 1.5rem;">
+            출시 알림을 신청하시면 가장 먼저 만나보실 수 있습니다.[cite: 2]
+        </p>
+
+        <!-- 기존 이메일 신청 폼[cite: 2] -->
+        <form id="email-form" action="https://formspree.io/f/mqewrbnw" method="POST" class="email-form">
+            <input type="email" name="email" class="email-input" placeholder="이메일 주소를 입력하세요" required>
+            <button type="submit" class="btn">출시 알림 신청</button>
+        </form>
+
+        <div class="footer">
+            <span>&copy; 2026 EAstudyhub. All rights reserved.[cite: 2]</span>
+        </div>
     </div>
 </body>
 </html>
