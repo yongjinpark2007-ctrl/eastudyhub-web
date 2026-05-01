@@ -208,7 +208,7 @@
             </div>
             
             <!-- 블로그 전체 글 보기 버튼 -->
-            <a href="/blog/" class="blog-link-btn">
+            <a href="https://blog.eastudyhub.com/" class="blog-link-btn">
                 <i class="fa-solid fa-book-open"></i>
                 EA 학습 블로그 전체 글 보기
                 <i class="fa-solid fa-arrow-right"></i>
@@ -224,7 +224,7 @@
     // 블로그 RSS에서 최신 글 가져오기
     async function loadLatestPosts() {
         const container = document.getElementById('latest-posts');
-        const RSS_URL = '/blog/rss.xml';
+        const RSS_URL = 'https://blog.eastudyhub.com/rss.xml';
         const MAX_POSTS = 3; // 표시할 글 개수
         
         try {
@@ -293,7 +293,7 @@
             console.error('Error loading posts:', error);
             // 에러 시 fallback 카드 표시
             container.innerHTML = `
-                <a href="/blog/" class="news-card-link">
+                <a href="https://blog.eastudyhub.com/" class="news-card-link">
                     <div class="news-card">
                         <div class="news-card-meta">
                             <span style="font-weight:bold; color:var(--primary);">블로그 방문</span>
