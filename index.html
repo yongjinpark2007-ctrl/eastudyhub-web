@@ -379,7 +379,14 @@
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
             
-            const items = xmlDoc.querySelectorAll('item');
+            const items = Array.from(xmlDoc.querySelectorAll('item'));
+
+            // 최신순 정렬: pubDate 기준 내림차순 (가장 최근 글이 맨 위로)
+            items.sort((a, b) => {
+                const dateA = new Date(a.querySelector('pubDate')?.textContent || 0);
+                const dateB = new Date(b.querySelector('pubDate')?.textContent || 0);
+                return dateB - dateA;
+            });
             
             if (items.length === 0) {
                 container.innerHTML = `
