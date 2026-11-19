@@ -523,16 +523,55 @@
         <!-- 뉴스 섹션 + 블로그 링크 -->
         <div class="news-board">
             <div class="news-board-title">
-                <i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> 최신 IRS 세무 뉴스
+                <i class="fa-solid fa-thumbtack" style="color: var(--primary);"></i> 먼저 읽어보세요
             </div>
             
-            <!-- 동적으로 채워질 영역 -->
-            <div id="latest-posts">
-                <div class="news-loading">
-                    <i class="fa-solid fa-spinner fa-spin"></i> 최신 글을 불러오는 중...
+            <!-- 고정 가이드 (글이 드물어도 오래된 느낌이 나지 않도록 날짜 없이 고정) -->
+            <div id="pinned-guides">
+                <a href="https://blog.eastudyhub.com/2026-tax-ea-usa-study/" class="news-card-link">
+                    <div class="news-card">
+                        <div class="news-card-meta">
+                            <span style="font-weight:bold; color:var(--primary);">시험 준비 팁</span>
+                        </div>
+                        <div class="news-card-title">미국 거주 한인을 위한 EA 자격증 도전 가이드</div>
+                    </div>
+                </a>
+                <a href="https://blog.eastudyhub.com/2026-see-psi-ea-exam/" class="news-card-link">
+                    <div class="news-card">
+                        <div class="news-card-meta">
+                            <span style="font-weight:bold; color:var(--primary);">시험 준비 팁</span>
+                        </div>
+                        <div class="news-card-title">2026 EA 시험(SEE) 운영기관 변경과 응시 환경</div>
+                    </div>
+                </a>
+                <a href="https://blog.eastudyhub.com/2026-5-4-ea-irs-psi/" class="news-card-link">
+                    <div class="news-card">
+                        <div class="news-card-meta">
+                            <span style="font-weight:bold; color:var(--primary);">시험 준비 팁</span>
+                        </div>
+                        <div class="news-card-title">PSI IRS 전용 페이지로 EA 시험 예약하기</div>
+                    </div>
+                </a>
+                <a href="https://blog.eastudyhub.com/2026-ea-korea-usa-tax/" class="news-card-link">
+                    <div class="news-card">
+                        <div class="news-card-meta">
+                            <span style="font-weight:bold; color:var(--primary);">EA 커리어</span>
+                        </div>
+                        <div class="news-card-title">한국에서 미국 공인 세무사 EA를 준비해야 하는 이유</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- IRS 최신 발표는 IRS 뉴스룸으로 바로 연결 -->
+            <a href="https://www.irs.gov/newsroom" target="_blank" rel="noopener" class="news-card-link">
+                <div class="news-card">
+                    <div class="news-card-meta">
+                        <span style="font-weight:bold; color:var(--primary);">IRS 최신 발표</span>
+                    </div>
+                    <div class="news-card-title">IRS 뉴스룸(irs.gov)에서 최신 세무 소식 확인하기</div>
                 </div>
-            </div>
-            
+            </a>
+
             <!-- 블로그 전체 글 보기 버튼 -->
             <a href="https://blog.eastudyhub.com/" class="blog-link-btn">
                 <i class="fa-solid fa-book-open"></i>
@@ -654,104 +693,6 @@
         }
     });
 
-    // ============================================
-    // 블로그 RSS에서 최신 글 가져오기
-    // ============================================
-    async function loadLatestPosts() {
-        const container = document.getElementById('latest-posts');
-        const RSS_URL = 'https://blog.eastudyhub.com/rss.xml';
-        const MAX_POSTS = 3; // 표시할 글 개수
-        
-        try {
-            const response = await fetch(RSS_URL);
-            if (!response.ok) throw new Error('RSS fetch failed');
-            
-            const xmlText = await response.text();
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-            
-            const items = Array.from(xmlDoc.querySelectorAll('item'));
-
-            // 최신순 정렬: pubDate 기준 내림차순 (가장 최근 글이 맨 위로)
-            items.sort((a, b) => {
-                const dateA = new Date(a.querySelector('pubDate')?.textContent || 0);
-                const dateB = new Date(b.querySelector('pubDate')?.textContent || 0);
-                return dateB - dateA;
-            });
-            
-            if (items.length === 0) {
-                container.innerHTML = `
-                    <div class="news-empty">
-                        <i class="fa-regular fa-clock" style="color: var(--primary); margin-right: 0.4rem;"></i>
-                        곧 흥미로운 EA 학습 콘텐츠로 만나뵙겠습니다.
-                    </div>
-                `;
-                return;
-            }
-            
-            let html = '';
-            const limit = Math.min(items.length, MAX_POSTS);
-            
-            for (let i = 0; i < limit; i++) {
-                const item = items[i];
-                const title = item.querySelector('title')?.textContent || '제목 없음';
-                const link = item.querySelector('link')?.textContent || '#';
-                const pubDate = item.querySelector('pubDate')?.textContent;
-                const description = item.querySelector('description')?.textContent || '';
-                
-                // 날짜 포맷
-                let dateStr = '';
-                if (pubDate) {
-                    const date = new Date(pubDate);
-                    const year = date.getFullYear();
-                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                    const day = String(date.getDate()).padStart(2, '0');
-                    dateStr = `${year}.${month}.${day}`;
-                }
-                
-                // 요약 길이 제한 (HTML 태그 제거)
-                const cleanDesc = description.replace(/<[^>]*>/g, '').trim();
-                const shortDesc = cleanDesc.length > 100 
-                    ? cleanDesc.substring(0, 100) + '...' 
-                    : cleanDesc;
-                
-                html += `
-                    <a href="${link}" class="news-card-link">
-                        <div class="news-card">
-                            <div class="news-card-meta">
-                                <span style="font-weight:bold; color:var(--primary);">최신 글</span>
-                                <span>| ${dateStr}</span>
-                            </div>
-                            <div class="news-card-title">${title}</div>
-                            ${shortDesc ? `<div class="news-card-body">${shortDesc}</div>` : ''}
-                        </div>
-                    </a>
-                `;
-            }
-            
-            container.innerHTML = html;
-            
-        } catch (error) {
-            console.error('Error loading posts:', error);
-            // 에러 시 fallback 카드 표시
-            container.innerHTML = `
-                <a href="https://blog.eastudyhub.com/" class="news-card-link">
-                    <div class="news-card">
-                        <div class="news-card-meta">
-                            <span style="font-weight:bold; color:var(--primary);">블로그 방문</span>
-                        </div>
-                        <div class="news-card-title">EA 학습 블로그에서 최신 세무 정보를 확인하세요</div>
-                        <div class="news-card-body">
-                            IRS 최신 뉴스 한국어 해설, EA 시험 팁, 세법 업데이트를 만나보세요.
-                        </div>
-                    </div>
-                </a>
-            `;
-        }
-    }
-    
-    // 페이지 로드 시 실행
-    loadLatestPosts();
     </script>
 </body>
 </html>
