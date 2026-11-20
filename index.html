@@ -138,6 +138,8 @@
             box-shadow: 0 16px 40px rgba(27,33,120,.28); transition: transform .15s ease;
         }
         .issue-latest:hover { transform: translateY(-2px); }
+        .issue-latest.wide { grid-column: 1 / -1; }
+        .issue-latest.wide .issue-points { grid-template-columns: 1fr 1fr; }
         .issue-latest::after {
             content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px;
             border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.14), transparent 70%);
@@ -161,7 +163,6 @@
         .issue-date { font-size: 13px; font-weight: 700; color: var(--ink-3); }
         .issue-name { font-size: 15px; font-weight: 600; line-height: 1.45; }
         .issue-row i { color: #c0c4cc; font-size: 12px; }
-        .archive-empty { color: var(--ink-3); font-size: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
         .archive-all { margin-top: auto; padding-top: 14px; font-weight: 700; color: var(--brand); font-size: 15px; display: inline-flex; gap: 8px; align-items: center; }
         .empty-card { grid-column: 1 / -1; background: #fff; border: 1px dashed var(--line); border-radius: var(--radius); padding: 32px; text-align: center; color: var(--ink-3); }
 
@@ -250,6 +251,7 @@
         @media (max-width: 960px) {
             .hero .wrap { grid-template-columns: 1fr; gap: 32px; padding-top: 44px; padding-bottom: 44px; }
             #weekly-content { grid-template-columns: 1fr; }
+            .issue-latest.wide .issue-points { grid-template-columns: 1fr; }
             .guide-grid { grid-template-columns: repeat(2, 1fr); }
             .post-grid { grid-template-columns: repeat(2, 1fr); }
             .pracexam { grid-template-columns: 1fr; padding: 28px; }
@@ -331,7 +333,7 @@
                         <p>지난주 IRS 발표 중 EA 수험생과 실무자가 알아야 할 내용을 한국어로 정리합니다.</p>
                     </div>
                 </div>
-                <div id="weekly-content"><a class="issue-latest" href="https://blog.eastudyhub.com/irs-weekly-2026-11-17/"><div class="issue-top"><span class="issue-badge">최신호</span><span class="issue-when">2026년 11월 17일</span></div><h3>11월 10–17일: 2027년 401(k) 한도, 표준공제자 기부 공제 외</h3><ul class="issue-points"><li><i class="fa-solid fa-circle-check"></i><span>2027년 401(k) 납입 한도 $25,500으로 인상, IRA는 $7,500 유지</span></li><li><i class="fa-solid fa-circle-check"></i><span>2026 과세연도부터 표준공제를 받아도 현금 기부 최대 $1,000(부부 $2,000) 공제</span></li><li><i class="fa-solid fa-circle-check"></i><span>401(k)·403(b) 자동가입 최종 규정 발표 (2028 플랜 연도부터)</span></li><li><i class="fa-solid fa-circle-check"></i><span>2027 신고 시즌 준비: 종이 환급 수표 단계적 폐지</span></li></ul><div class="issue-foot"><span class="chips"><span class="chip">Part 1</span><span class="chip">Part 2</span></span><span class="issue-cta">이번 호 읽기 <i class="fa-solid fa-arrow-right"></i></span></div></a><div class="issue-archive"><div class="archive-head">지난 호</div><p class="archive-empty">지난 호가 쌓이면 여기에 모입니다.</p><a class="archive-all" href="https://blog.eastudyhub.com/#weekly">전체 지난 호 보기 <i class="fa-solid fa-arrow-right"></i></a></div></div>
+                <div id="weekly-content"><a class="issue-latest wide" href="https://blog.eastudyhub.com/irs-weekly-2026-11-17/"><div class="issue-top"><span class="issue-badge">최신호</span><span class="issue-when">2026년 11월 17일</span></div><h3>11월 10–17일: 2027년 401(k) 한도, 표준공제자 기부 공제 외</h3><ul class="issue-points"><li><i class="fa-solid fa-circle-check"></i><span>2027년 401(k) 납입 한도 $25,500으로 인상, IRA는 $7,500 유지</span></li><li><i class="fa-solid fa-circle-check"></i><span>2026 과세연도부터 표준공제를 받아도 현금 기부 최대 $1,000(부부 $2,000) 공제</span></li><li><i class="fa-solid fa-circle-check"></i><span>401(k)·403(b) 자동가입 최종 규정 발표 (2028 플랜 연도부터)</span></li><li><i class="fa-solid fa-circle-check"></i><span>2027 신고 시즌 준비: 종이 환급 수표 단계적 폐지</span></li></ul><div class="issue-foot"><span class="chips"><span class="chip">Part 1</span><span class="chip">Part 2</span></span><span class="issue-cta">이번 호 읽기 <i class="fa-solid fa-arrow-right"></i></span></div></a></div>
 
                 <div class="subscribe">
                     <div class="subscribe-text">

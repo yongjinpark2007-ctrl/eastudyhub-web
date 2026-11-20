@@ -52,18 +52,18 @@
         '<span class="issue-name">' + esc(weeklyTitle(p.title)) + '</span>' +
         '<i class="fa-solid fa-chevron-right"></i></a>';
     }).join('');
+    // 지난 호가 아직 없으면 최신호를 가로로 넓게 보여줍니다.
     return '' +
-      '<a class="issue-latest" href="' + esc(latest.url) + '">' +
+      '<a class="issue-latest' + (past ? '' : ' wide') + '" href="' + esc(latest.url) + '">' +
         '<div class="issue-top"><span class="issue-badge">최신호</span><span class="issue-when">' + esc(fmtDate(latest.pubDate)) + '</span></div>' +
         '<h3>' + esc(weeklyTitle(latest.title)) + '</h3>' +
         (hl ? '<ul class="issue-points">' + hl + '</ul>' : '<p class="issue-desc">' + esc(latest.description) + '</p>') +
         '<div class="issue-foot"><span class="chips">' + tags(latest.tags) + '</span><span class="issue-cta">이번 호 읽기 <i class="fa-solid fa-arrow-right"></i></span></div>' +
       '</a>' +
-      '<div class="issue-archive">' +
-        '<div class="archive-head">지난 호</div>' +
-        (past || '<p class="archive-empty">지난 호가 쌓이면 여기에 모입니다.</p>') +
+      (past ? '<div class="issue-archive">' +
+        '<div class="archive-head">지난 호</div>' + past +
         '<a class="archive-all" href="https://blog.eastudyhub.com/#weekly">전체 지난 호 보기 <i class="fa-solid fa-arrow-right"></i></a>' +
-      '</div>';
+      '</div>' : '');
   }
 
   function renderGuides(posts) {
