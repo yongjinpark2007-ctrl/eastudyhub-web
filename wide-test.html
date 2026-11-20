@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>wide test</title>
+<style>html,body{margin:0;background:#888}#box{transform-origin:0 0}iframe{border:0;display:block;background:#fff}
+#label{position:fixed;top:0;right:0;background:#c00;color:#fff;font:14px sans-serif;padding:4px 8px;z-index:9}</style></head>
+<body><div id="label"></div><div id="box"><iframe id="f"></iframe></div>
+<script>
+var q=new URLSearchParams(location.search),w=+(q.get('w')||2560),h=+(q.get('h')||1300),u=q.get('u')||'https://eastudyhub.com/';
+var allowed=['https://eastudyhub.com/','https://blog.eastudyhub.com/','https://blog.eastudyhub.com/irs-weekly-2026-11-17/'];
+if(allowed.indexOf(u)<0)u=allowed[0];
+var f=document.getElementById('f');f.src=u;f.width=w;f.height=h;
+var s=document.documentElement.clientWidth/w;document.getElementById('box').style.transform='scale('+s+')';
+document.getElementById('label').textContent=w+'px  '+u;
+</script></body></html>
