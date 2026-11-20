@@ -58,6 +58,10 @@
             -webkit-font-smoothing: antialiased;
         }
         a { color: inherit; text-decoration: none; }
+        /* 태블릿(iPad Safari)에서 가로 넘침으로 화면이 축소·왼쪽 쏠림되지 않도록 */
+        html { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        img { max-width: 100%; }
+        .hero .wrap > *, #weekly-content > *, .guide-grid > *, .post-grid > *, .pracexam > *, .px-features > *, .issue-points li > * { min-width: 0; }
         .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
         /* ---------- 상단 메뉴 ---------- */
@@ -83,7 +87,7 @@
                 var(--white);
             border-bottom: 1px solid var(--line);
         }
-        .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 64px; }
+        .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 64px; }
         .eyebrow {
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 13px; font-weight: 700; color: var(--brand);
@@ -130,7 +134,7 @@
         .chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 
         /* ---------- 1. IRS 주간 뉴스 ---------- */
-        #weekly-content { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
+        #weekly-content { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px; }
         .issue-latest {
             display: flex; flex-direction: column; gap: 16px;
             background: linear-gradient(150deg, #1b2178 0%, #2a33a8 60%, #3b46c4 100%);
@@ -139,7 +143,7 @@
         }
         .issue-latest:hover { transform: translateY(-2px); }
         .issue-latest.wide { grid-column: 1 / -1; }
-        .issue-latest.wide .issue-points { grid-template-columns: 1fr 1fr; }
+        .issue-latest.wide .issue-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .issue-latest::after {
             content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px;
             border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.14), transparent 70%);
@@ -158,7 +162,7 @@
 
         .issue-archive { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
         .archive-head { font-weight: 800; font-size: 17px; margin-bottom: 8px; }
-        .issue-row { display: grid; grid-template-columns: 76px 1fr 14px; gap: 12px; align-items: center; padding: 13px 4px; border-top: 1px solid var(--line); }
+        .issue-row { display: grid; grid-template-columns: 76px minmax(0, 1fr) 14px; gap: 12px; align-items: center; padding: 13px 4px; border-top: 1px solid var(--line); }
         .issue-row:hover .issue-name { color: var(--brand); }
         .issue-date { font-size: 13px; font-weight: 700; color: var(--ink-3); }
         .issue-name { font-size: 15px; font-weight: 600; line-height: 1.45; }
@@ -184,7 +188,7 @@
         .subhead-row { margin: 8px 0 14px; }
         .sub-title { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .sub-title i { color: var(--brand); font-size: 15px; }
-        .guide-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+        .guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 40px; }
         .guide-card {
             background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px;
             display: flex; flex-direction: column; gap: 8px; min-height: 190px; box-shadow: var(--shadow);
@@ -209,7 +213,7 @@
         .tab.active .tab-count { background: rgba(255,255,255,.18); }
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
-        .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
         .post-card {
             background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px;
             display: flex; flex-direction: column; gap: 10px; transition: border-color .15s ease, box-shadow .15s ease;
@@ -227,7 +231,7 @@
         .pracexam {
             margin: 80px 0 0; border-radius: 24px; overflow: hidden;
             background: linear-gradient(135deg, #ffffff 0%, var(--sea-soft) 100%);
-            border: 1px solid #C9DEDB; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; padding: 40px;
+            border: 1px solid #C9DEDB; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; padding: 40px;
         }
         .pracexam img { height: 40px; width: auto; margin-bottom: 16px; }
         .pracexam h2 { font-size: 26px; line-height: 1.35; font-weight: 800; color: var(--slate); margin-bottom: 10px; letter-spacing: -0.01em; }
@@ -236,7 +240,7 @@
         .pracexam .btn-slate:hover { background: #4d6164; }
         .pracexam .note { font-size: 14px; color: #6b7a7d; margin-top: 10px; }
         .pracexam .note strong { color: #b85f3f; }
-        .px-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: center; }
+        .px-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-content: center; }
         .px-feature { background: #fff; border: 1px solid #C9DEDB; border-radius: 14px; padding: 16px; }
         .px-feature i { color: var(--sea); font-size: 18px; margin-bottom: 8px; display: block; }
         .px-feature strong { display: block; color: var(--slate); font-size: 15px; }
@@ -249,12 +253,12 @@
 
         /* ---------- 반응형 ---------- */
         @media (max-width: 960px) {
-            .hero .wrap { grid-template-columns: 1fr; gap: 32px; padding-top: 44px; padding-bottom: 44px; }
-            #weekly-content { grid-template-columns: 1fr; }
-            .issue-latest.wide .issue-points { grid-template-columns: 1fr; }
-            .guide-grid { grid-template-columns: repeat(2, 1fr); }
-            .post-grid { grid-template-columns: repeat(2, 1fr); }
-            .pracexam { grid-template-columns: 1fr; padding: 28px; }
+            .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 44px; padding-bottom: 44px; }
+            #weekly-content { grid-template-columns: minmax(0, 1fr); }
+            .issue-latest.wide .issue-points { grid-template-columns: minmax(0, 1fr); }
+            .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .pracexam { grid-template-columns: minmax(0, 1fr); padding: 28px; }
         }
         @media (max-width: 640px) {
             .wrap { padding: 0 16px; }
@@ -269,10 +273,10 @@
             .issue-latest { padding: 22px; }
             .issue-latest h3 { font-size: 20px; }
             .issue-points li { font-size: 15px; }
-            .guide-grid, .post-grid { grid-template-columns: 1fr; }
+            .guide-grid, .post-grid { grid-template-columns: minmax(0, 1fr); }
             .guide-card { min-height: 0; }
             .email-form { flex-direction: column; max-width: none; }
-            .px-features { grid-template-columns: 1fr 1fr; }
+            .px-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .pracexam { margin-top: 56px; padding: 22px; }
             .pracexam h2 { font-size: 22px; }
         }
