@@ -255,6 +255,8 @@
         .topnav a:hover { background: var(--brand-soft); color: var(--brand); }
         .topnav a.nav-cta { background: var(--brand); color: #fff; padding: 8px 14px; }
         .topnav a.nav-cta:hover { background: var(--brand-dark); color: #fff; }
+        .topnav a.nav-cta { display: inline-flex; align-items: center; gap: 8px; }
+        .topnav a.nav-cta img { height: 17px; width: auto; display: block; }
 
         /* ---------- 히어로 ---------- */
         .hero {
@@ -479,7 +481,7 @@
                 <a href="#weekly">IRS 주간 뉴스</a>
                 <a href="#guides">학습 가이드</a>
                 <a href="https://blog.eastudyhub.com/">블로그</a>
-                <a class="nav-cta" href="https://pracexam.com/ea" target="_blank" rel="noopener">PracExam 시작</a>
+                <a class="nav-cta" href="https://pracexam.com/ea" target="_blank" rel="noopener" aria-label="PracExam 시작하기"><img src="/images/pracexam-logo-white.png" alt="PracExam" width="520" height="110"><span>시작하기</span></a>
             </nav>
         </div>
     </header>
