@@ -1,0 +1,38 @@
+# EA studyHub
+
+> EA studyHub(eastudyhub.com)는 미국 세무사(EA, Enrolled Agent) 시험을 한국어로 준비하는 학습 허브입니다. 매주 IRS 세법 뉴스를 한국어로 정리하고, EA 시험 준비 가이드를 모아 두며, 실전 문제풀이는 PracExam(pracexam.com/ea)으로 연결합니다. 대상은 한국과 미국에 사는 한국어 사용 수험생입니다.
+
+## EA 시험 핵심 정보 (IRS 공식 안내 기준, 2026년 11월 21일 확인)
+
+- EA(Enrolled Agent)는 IRS 앞에서 납세자를 대리할 수 있는 자격을 IRS로부터 받은 세무 전문가입니다. 변호사·CPA처럼 대리할 수 있는 납세자, 세무 사안, IRS 부서에 일반적으로 제한이 없습니다.
+- 시험(Special Enrollment Examination, SEE)은 세 파트입니다: Part 1 Individuals(개인), Part 2 Businesses(사업), Part 3 Representation, Practices and Procedures(대리·실무·절차).
+- 파트마다 100문항(채점 85 + 비채점 15), 3시간 30분. 순서는 자유이고, 합격한 날부터 3년 안에 세 파트를 모두 합격해야 합니다.
+- 첫 단계는 PTIN 발급. 시험 운영기관은 2026년 3월 1일부터 PSI Services(이전 Prometric). 응시료는 파트당 $317.
+- 현재 응시 기간: 2026년 7월 1일 ~ 2027년 2월 28일(미국 국내 응시자). 3~4월에는 시험이 없습니다.
+- 현재 시험은 2025년 12월 31일까지 개정된 세법, 2025 과세연도 기준입니다.
+- 해외(한국 포함) 응시는 IRS가 지연 중이며 시작일이 정해지지 않았다고 안내합니다. 원격 응시는 미국 안에 있는 응시자만 가능합니다.
+- 파트마다 한 응시 기간에 최대 4번 응시 가능. 세 파트 합격 후 1년 안에 Form 23으로 등록 신청(수수료 $140)하고 적격성 심사를 통과해야 합니다.
+- 자격 유지: 3년마다 보수교육 72시간(매년 최소 16시간, 그중 윤리 2시간).
+
+## 주요 페이지
+
+- [EA studyHub 홈](https://eastudyhub.com/): IRS 주간 뉴스, 시험 준비 가이드, 자주 묻는 질문
+- [자주 묻는 질문](https://eastudyhub.com/#faq): EA 시험 Q&A 11개
+- [EA studyHub 블로그](https://blog.eastudyhub.com/): 세법 업데이트, 시험 준비 팁, EA 커리어 글
+- [블로그 글 목록 (llms.txt)](https://blog.eastudyhub.com/llms.txt): 글마다 제목·요약·주소
+- [IRS 주간 뉴스 (PracExam, 한국어)](https://pracexam.com/ea/irs-news/ko/): 매주 월요일 발행되는 IRS 세법 뉴스 한국어판
+
+## 시험 준비 가이드
+
+- [2026 IRS EA 시험 예약 정보: PSI IRS 전용 페이지 이용 필수](https://blog.eastudyhub.com/2026-5-4-ea-irs-psi/)
+- [2026 EA 시험(SEE) 운영기관 변경 및 응시 환경 변화](https://blog.eastudyhub.com/2026-see-psi-ea-exam/)
+- [미국 거주 한인들의 도전, 미국 세무사(EA) 자격증](https://blog.eastudyhub.com/2026-tax-ea-usa-study/)
+- [한국에서 왜 미국 세무사 EA를 준비해야 하는가](https://blog.eastudyhub.com/2026-ea-korea-usa-tax/)
+
+## 실전 문제풀이
+
+- [PracExam](https://pracexam.com/ea): EA 시험 실전 문제 서비스. 5,000+ 시나리오 문항, 한·영 이중 해설, CBT 시뮬레이션. 30일 무료 학습, Pro 플랜 월 $29.
+
+## 문의
+
+- contact@eastudyhub.com

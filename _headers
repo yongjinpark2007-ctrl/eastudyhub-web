@@ -1,0 +1,15 @@
+# 예전 첫 화면 파일: 검색 결과에 나오지 않게 합니다 (파일은 그대로 둠).
+/index_old.html
+  X-Robots-Tag: noindex, nofollow
+/index_old
+  X-Robots-Tag: noindex, nofollow
+/index_old2.html
+  X-Robots-Tag: noindex, nofollow
+/index_old2
+  X-Robots-Tag: noindex, nofollow
+
+# 한국어가 깨지지 않도록 문자 인코딩을 지정합니다.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
