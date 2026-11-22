@@ -238,7 +238,7 @@
         /* 태블릿(iPad Safari)에서 가로 넘침으로 화면이 축소·왼쪽 쏠림되지 않도록 */
         html { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         img { max-width: 100%; }
-        .hero .wrap > *, #weekly-content > *, .guide-grid > *, .post-grid > *, .pracexam > *, .px-features > *, .issue-points li > * { min-width: 0; }
+        .hero .wrap > *, #weekly-content > *, .guide-grid > *, .post-grid > *, .pracexam > *, .px-stats > *, .issue-points li > * { min-width: 0; }
         .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
         /* ---------- 상단 메뉴 ---------- */
@@ -412,7 +412,10 @@
 
         /* ---------- PracExam ---------- */
         .px-band { background: var(--slate); color: #fff; padding: 72px 0; }
-        .pracexam { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+        .pracexam { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; }
+        .px-intro p { margin-bottom: 0; max-width: 36em; }
+        .px-cta { text-align: center; }
+        .px-cta .note { margin-bottom: 0; }
         .pracexam img { height: 36px; width: auto; margin-bottom: 18px; }
         .pracexam h2 { font-size: 28px; line-height: 1.35; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.01em; }
         .pracexam p { color: rgba(255,255,255,.8); margin-bottom: 22px; }
@@ -420,11 +423,10 @@
         .pracexam .btn-slate:hover { background: var(--sea-soft); }
         .pracexam .note { font-size: 14px; color: rgba(255,255,255,.7); margin-top: 10px; }
         .pracexam .note strong { color: #f3b9a5; }
-        .px-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-content: center; }
-        .px-feature { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 16px; }
-        .px-feature i { color: #9fd0ca; font-size: 18px; margin-bottom: 8px; display: block; }
-        .px-feature strong { display: block; color: #fff; font-size: 15px; }
-        .px-feature span { font-size: 13px; color: rgba(255,255,255,.7); }
+        /* PracExam 랜딩 히어로 밑 숫자 라인과 같은 구성 */
+        .px-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; text-align: center; border-top: 1px solid rgba(255,255,255,.16); margin-top: 16px; padding-top: 32px; }
+        .px-stat-num { font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; color: #fff; letter-spacing: -0.01em; white-space: nowrap; }
+        .px-stat-label { font-size: 14px; color: rgba(255,255,255,.72); margin-top: 4px; line-height: 1.45; }
 
         footer { border-top: 1px solid var(--line); background: #fff; }
         footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 24px; padding-bottom: 32px; font-size: 14px; color: var(--ink-3); }
@@ -438,7 +440,12 @@
             .issue-latest.wide .issue-points { grid-template-columns: minmax(0, 1fr); }
             .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .pracexam { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+            .pracexam { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+            .px-cta { text-align: left; }
+        }
+        @media (max-width: 760px) {
+            .px-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+            .px-stats > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
         }
         @media (max-width: 640px) {
             .wrap { padding: 0 16px; }
@@ -456,7 +463,6 @@
             .guide-grid, .post-grid { grid-template-columns: minmax(0, 1fr); }
             .guide-card { min-height: 0; }
             .email-form { flex-direction: column; max-width: none; }
-            .px-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .pracexam h2 { font-size: 22px; }
         }
         /* ---------- 자주 묻는 질문 ---------- */
@@ -624,18 +630,21 @@
         <section class="px-band" aria-label="PracExam">
           <div class="wrap">
             <div class="pracexam">
-                <div>
+                <div class="px-intro">
                     <img src="/images/pracexam-logo-white.png" alt="PracExam" width="520" height="110" loading="lazy">
                     <h2>읽은 내용은 문제로 확인해야<br>내 것이 됩니다</h2>
                     <p>5,000+ 시나리오 문항, 한·영 이중 해설, CBT 시뮬레이션으로 EA 시험을 실전처럼 준비하세요.</p>
+                </div>
+                <div class="px-cta">
                     <a class="btn btn-slate" href="https://pracexam.com/ea" target="_blank" rel="noopener"><i class="fa-solid fa-rocket"></i> PracExam 무료로 시작하기</a>
                     <p class="note"><strong>30일 무료 학습</strong> 제공, Pro 플랜 월 $29</p>
                 </div>
-                <div class="px-features">
-                    <div class="px-feature"><i class="fa-solid fa-desktop"></i><strong>실전 CBT 시뮬레이션</strong><span>실제 시험 화면처럼 연습</span></div>
-                    <div class="px-feature"><i class="fa-solid fa-chart-column"></i><strong>파트별 성취도 분석</strong><span>약한 주제를 한눈에</span></div>
-                    <div class="px-feature"><i class="fa-solid fa-language"></i><strong>한·영 이중 해설</strong><span>영어 문제를 한국어로 이해</span></div>
-                    <div class="px-feature"><i class="fa-solid fa-cloud"></i><strong>클라우드 진도 동기화</strong><span>어느 기기에서나 이어서</span></div>
+                <div class="px-stats">
+                    <div><div class="px-stat-num">5,000+</div><div class="px-stat-label">실전 문제</div></div>
+                    <div><div class="px-stat-num">War Room</div><div class="px-stat-label">주제별 세법 자세히 보기</div></div>
+                    <div><div class="px-stat-num">Mock Exams</div><div class="px-stat-label">실전 모의고사 900문항</div></div>
+                    <div><div class="px-stat-num">한·영</div><div class="px-stat-label">해설 언어 지원</div></div>
+                    <div><div class="px-stat-num">30일</div><div class="px-stat-label">무료 체험</div></div>
                 </div>
             </div>
           </div>
