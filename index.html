@@ -882,5 +882,37 @@
         }
     });
     </script>
+    <script>
+    // PracExam 링크 유입 표시 (2026-11-25, 사장님): eastudyhub.com에서 PracExam으로 가는 링크에 utm 표시를 붙여,
+    // PracExam 가입자 출처(raw_user_meta_data.attrib)에 utm_source=eastudyhub 와 누른 자리(utm_campaign)가 남게 합니다.
+    // 화면에 그려진 뒤(home.js가 바꾸는 쇼츠·주간 뉴스 포함) 붙이므로, 검색엔진이 보는 원래 HTML 링크는 깨끗하게 둡니다.
+    (function () {
+        function area(a) {
+            if (a.closest('header')) return 'header';
+            if (a.closest('footer')) return 'footer';
+            var s = a.closest('section');
+            if (!s) return 'page';
+            if (s.id) return s.id;
+            if (s.classList.contains('hero')) return 'hero';
+            if (s.classList.contains('px-band')) return 'pracexam-band';
+            return 'page';
+        }
+        function tag(a) {
+            try {
+                var u = new URL(a.href);
+                if (u.hostname !== 'pracexam.com' || u.searchParams.has('utm_source')) return;
+                u.searchParams.set('utm_source', 'eastudyhub');
+                u.searchParams.set('utm_medium', 'referral');
+                u.searchParams.set('utm_campaign', area(a));
+                a.href = u.toString();
+            } catch (e) {}
+        }
+        function run(root) { (root.querySelectorAll ? root : document).querySelectorAll('a[href*="pracexam.com"]').forEach(tag); }
+        run(document);
+        new MutationObserver(function (ms) {
+            ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) { if (n.matches && n.matches('a[href*="pracexam.com"]')) tag(n); run(n); } }); });
+        }).observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
 </body>
 </html>
