@@ -200,7 +200,7 @@
           (dt ? '<span class="short-when">' + dt.y + '년 ' + dt.m + '월 ' + dt.d + '일</span>' : '') + partChip(top.ea_part) + '</div>' +
         '<h3 class="short-title">' + esc(t) + '</h3>' +
         (desc ? '<p class="short-desc">' + esc(desc) + '</p>' : '') +
-        '<div class="short-actions"><a class="btn btn-primary" href="' + SHORTS_MORE + '" target="_blank" rel="noopener">' +
+        '<div class="short-actions"><a class="btn btn-px" href="' + SHORTS_MORE + '" target="_blank" rel="noopener">' +
           '<i class="fa-solid fa-circle-play"></i> PracExam에서 영상 더 보기</a></div>' +
         (past ? '<div class="short-past"><div class="archive-head">지난 영상</div>' + past + '</div>' : '') +
       '</div></div>';
