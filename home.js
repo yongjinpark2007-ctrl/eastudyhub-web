@@ -152,7 +152,86 @@
     });
   }
 
-  var api = { renderWeekly: renderWeekly, renderPxWeekly: renderPxWeekly, renderGuides: renderGuides };
+  // ── EA 쇼츠 (2026-11-25): PracExam EA YouTube 쇼츠 한국어판 ──
+  // 목록은 PracExam Supabase의 get_videos_for_viewer(익명 = 무료 공개 영상만)에서 읽고, 한국어 영상(youtube_id_ko)만 씁니다.
+  // 최신 1개는 여기서 재생하고, 지난 영상 3개와 "전체 보기"는 YouTube로 보냅니다.
+  var SB_URL = 'https://ufrhvodruulpgnmudzwh.supabase.co';
+  var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmcmh2b2RydXVscGdubXVkendoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5OTgyOTYsImV4cCI6MjA5NzU3NDI5Nn0.evW9GggJ2saXHgZah1SRQvSdle7AC5esAnrmpbm5jb8';
+  var SHORTS_CHANNEL = 'https://www.youtube.com/@PracExam-EA/shorts';
+  var YT_ID = /^[A-Za-z0-9_-]{6,20}$/;
+
+  // "미국 세무사 EA 시험: ... | 파트 1 실전 문제 #EA시험" -> "미국 세무사 EA 시험: ..."
+  function shortTitle(t) { return String(t || '').replace(/#\S+/g, ' ').split('|')[0].replace(/\s+/g, ' ').trim(); }
+  // 설명 첫 줄에서 해시태그와 링크 안내를 뺀 한 문장
+  function shortDesc(d) {
+    var line = String(d || '').split('\n')[0].replace(/#\S+/g, ' ');
+    line = line.split('\uD83D\uDD17')[0];   // 🔗 앞까지
+    return line.replace(/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\ufe0f]/gu, '').replace(/\s+/g, ' ').trim();
+  }
+  function ymd(d) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(d || ''));
+    return m ? { y: m[1], m: Number(m[2]), d: Number(m[3]) } : null;
+  }
+  function partChip(p) {
+    p = Number(p);
+    if (p === 0) return '<span class="chip">IRS Tax Tip</span>';
+    return p ? '<span class="chip">Part ' + p + '</span>' : '';
+  }
+
+  function renderShorts(rows) {
+    rows = (rows || []).filter(function (r) { return r && !r.locked && YT_ID.test(r.youtube_id_ko || ''); });
+    if (!rows.length) return '';
+    var top = rows[0], t = shortTitle(top.title_ko), dt = ymd(top.published_at);
+    var past = rows.slice(1, 4).map(function (r) {
+      var d = ymd(r.published_at);
+      return '<a class="short-row" href="https://www.youtube.com/shorts/' + esc(r.youtube_id_ko) + '" target="_blank" rel="noopener">' +
+        '<span class="issue-date">' + (d ? d.m + '월 ' + d.d + '일' : '') + '</span>' +
+        '<span class="issue-name">' + esc(shortTitle(r.title_ko)) + '</span>' +
+        '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+    }).join('');
+    var desc = shortDesc(top.description_ko);
+    return '<div class="short-grid">' +
+      '<div class="short-frame" data-id="' + esc(top.youtube_id_ko) + '" data-title="' + esc(t) + '">' +
+        '<button type="button" class="short-poster" aria-label="영상 재생: ' + esc(t) + '">' +
+        '<img src="https://i.ytimg.com/vi/' + esc(top.youtube_id_ko) + '/hqdefault.jpg" alt="" width="360" height="640" decoding="async">' +
+        '<span class="short-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span></button></div>' +
+      '<div class="short-side">' +
+        '<div class="short-top"><span class="issue-badge">최신 영상</span>' +
+          (dt ? '<span class="short-when">' + dt.y + '년 ' + dt.m + '월 ' + dt.d + '일</span>' : '') + partChip(top.ea_part) + '</div>' +
+        '<h3 class="short-title">' + esc(t) + '</h3>' +
+        (desc ? '<p class="short-desc">' + esc(desc) + '</p>' : '') +
+        '<div class="short-actions"><a class="btn btn-primary" href="' + SHORTS_CHANNEL + '" target="_blank" rel="noopener">' +
+          '<i class="fa-brands fa-youtube"></i> YouTube에서 쇼츠 전체 보기</a></div>' +
+        (past ? '<div class="short-past"><div class="archive-head">지난 영상</div>' + past + '</div>' : '') +
+      '</div></div>';
+  }
+
+  // 포스터를 누르면 그 자리에서 YouTube(쿠키 없는 주소)로 재생합니다. 그 전에는 YouTube를 불러오지 않습니다.
+  function bindShort(scope) {
+    var box = scope.querySelector('.short-frame');
+    if (!box) return;
+    var btn = box.querySelector('.short-poster');
+    if (btn) btn.addEventListener('click', function () {
+      var id = box.getAttribute('data-id');
+      if (!YT_ID.test(id || '')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+      f.title = box.getAttribute('data-title') || 'EA 쇼츠';
+      f.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+      f.setAttribute('allowfullscreen', '');
+      box.innerHTML = '';
+      box.appendChild(f);
+    });
+  }
+  function loadShorts() {
+    return fetch(SB_URL + '/rest/v1/rpc/get_videos_for_viewer', {
+      method: 'POST',
+      headers: { apikey: SB_ANON, Authorization: 'Bearer ' + SB_ANON, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_limit: 12 })
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+
+  var api = { renderWeekly: renderWeekly, renderPxWeekly: renderPxWeekly, renderGuides: renderGuides, renderShorts: renderShorts };
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; return; }
 
   // 브라우저: 페이지에 미리 들어 있는 내용을 보여준 뒤, 블로그의 최신 목록으로 바꿉니다.
@@ -160,6 +239,17 @@
     var weeklyEl = document.getElementById('weekly-content');
     var guidesEl = document.getElementById('guides-content');
     bindTabs(guidesEl);
+    // EA 쇼츠: 실패하면 페이지에 미리 들어 있는 영상을 그대로 둡니다.
+    var shortsEl = document.getElementById('shorts-content');
+    if (shortsEl) {
+      bindShort(shortsEl);
+      loadShorts()
+        .then(function (rows) {
+          var h = renderShorts(rows);
+          if (h && !shortsEl.querySelector('iframe')) { shortsEl.innerHTML = h; bindShort(shortsEl); }
+        })
+        .catch(function () {});
+    }
     fetch('https://blog.eastudyhub.com/posts.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (data) {
