@@ -154,10 +154,10 @@
 
   // ── EA 쇼츠 (2026-11-25): PracExam EA YouTube 쇼츠 한국어판 ──
   // 목록은 PracExam Supabase의 get_videos_for_viewer(익명 = 무료 공개 영상만)에서 읽고, 한국어 영상(youtube_id_ko)만 씁니다.
-  // 최신 1개는 여기서 재생하고, 지난 영상 3개와 "전체 보기"는 YouTube로 보냅니다.
+  // 최신 1개는 여기서 재생하고, 지난 영상 3개와 "영상 더 보기"는 PracExam 영상 페이지(한국어)로 보냅니다.
   var SB_URL = 'https://ufrhvodruulpgnmudzwh.supabase.co';
   var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmcmh2b2RydXVscGdubXVkendoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5OTgyOTYsImV4cCI6MjA5NzU3NDI5Nn0.evW9GggJ2saXHgZah1SRQvSdle7AC5esAnrmpbm5jb8';
-  var SHORTS_CHANNEL = 'https://www.youtube.com/@PracExam-EA/shorts';
+  var SHORTS_MORE = 'https://pracexam.com/videos?lang=ko';   // 사장님 2026-11-25: YouTube로 빠지지 않게 PracExam 영상 페이지(한국어)로
   var YT_ID = /^[A-Za-z0-9_-]{6,20}$/;
 
   // "미국 세무사 EA 시험: ... | 파트 1 실전 문제 #EA시험" -> "미국 세무사 EA 시험: ..."
@@ -184,10 +184,10 @@
     var top = rows[0], t = shortTitle(top.title_ko), dt = ymd(top.published_at);
     var past = rows.slice(1, 4).map(function (r) {
       var d = ymd(r.published_at);
-      return '<a class="short-row" href="https://www.youtube.com/shorts/' + esc(r.youtube_id_ko) + '" target="_blank" rel="noopener">' +
+      return '<a class="short-row" href="' + SHORTS_MORE + '" target="_blank" rel="noopener">' +
         '<span class="issue-date">' + (d ? d.m + '월 ' + d.d + '일' : '') + '</span>' +
         '<span class="issue-name">' + esc(shortTitle(r.title_ko)) + '</span>' +
-        '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+        '<i class="fa-solid fa-chevron-right"></i></a>';
     }).join('');
     var desc = shortDesc(top.description_ko);
     return '<div class="short-grid">' +
@@ -200,8 +200,8 @@
           (dt ? '<span class="short-when">' + dt.y + '년 ' + dt.m + '월 ' + dt.d + '일</span>' : '') + partChip(top.ea_part) + '</div>' +
         '<h3 class="short-title">' + esc(t) + '</h3>' +
         (desc ? '<p class="short-desc">' + esc(desc) + '</p>' : '') +
-        '<div class="short-actions"><a class="btn btn-primary" href="' + SHORTS_CHANNEL + '" target="_blank" rel="noopener">' +
-          '<i class="fa-brands fa-youtube"></i> YouTube에서 쇼츠 전체 보기</a></div>' +
+        '<div class="short-actions"><a class="btn btn-primary" href="' + SHORTS_MORE + '" target="_blank" rel="noopener">' +
+          '<i class="fa-solid fa-circle-play"></i> PracExam에서 영상 더 보기</a></div>' +
         (past ? '<div class="short-past"><div class="archive-head">지난 영상</div>' + past + '</div>' : '') +
       '</div></div>';
   }

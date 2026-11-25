@@ -512,8 +512,9 @@
         footer.site-foot { border-top: 1px solid var(--line); background: #fff; color: var(--ink-3); font-size: 14px; }
         .site-foot .wrap { padding-top: 36px; padding-bottom: 32px; }
         .foot-brands { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-        .foot-brand { display: flex; flex-direction: column; gap: 6px; }
-        .foot-brand img { height: 30px; width: auto; }
+        .foot-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+        /* 2026-11-25 fix: in a flex column the logo was stretched to the caption width (squashed); keep its own width */
+        .foot-brand img { height: 30px; width: auto; max-width: none; align-self: flex-start; object-fit: contain; }
         .foot-brand span { font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
         .foot-plus { font-size: 22px; font-weight: 300; color: var(--ink-3); }
         .foot-motto { margin-top: 16px; color: var(--ink-2); }
@@ -639,18 +640,18 @@
             </div>
         </section>
 
-        <!-- 2. EA 쇼츠 (2026-11-25, 사장님): PracExam EA YouTube 쇼츠 한국어판. 최신 1개는 여기서 재생, 나머지는 YouTube 채널에서.
+        <!-- 2. EA 쇼츠 (2026-11-25, 사장님): PracExam EA YouTube 쇼츠 한국어판. 최신 1개는 여기서 재생, 나머지는 PracExam 영상 페이지(한국어)로 보냄 (YouTube로 빠지지 않게, 사장님 2026-11-25).
              목록은 home.js가 PracExam Supabase(get_videos_for_viewer, 무료 공개 영상만)에서 읽어 바꿉니다. 실패하면 아래 미리 넣어 둔 내용을 그대로 둡니다. -->
         <section class="block" id="shorts">
             <div class="wrap">
                 <div class="section-head">
                     <div>
-                        <div class="section-kicker"><i class="fa-brands fa-youtube"></i> YouTube 쇼츠 · 한국어</div>
-                        <h2>1분 EA 실전 문제</h2>
-                        <p>EA 시험에 나오는 문제를 짧은 영상으로 풀어 드립니다. 최신 영상은 여기서 보고, 나머지는 YouTube 채널에서 볼 수 있습니다.</p>
+                        <div class="section-kicker"><i class="fa-solid fa-circle-play"></i> 영상 · 한국어</div>
+                        <h2>EA 실전 문제 풀이 쇼츠</h2>
+                        <p>EA 시험에 나오는 문제를 짧은 영상으로 풀어 드립니다. 최신 영상은 여기서 보고, 더 많은 영상은 PracExam 영상 페이지에서 볼 수 있습니다.</p>
                     </div>
                 </div>
-                <div id="shorts-content"><div class="short-grid"><div class="short-frame" data-id="9bHlRVCoR3w" data-title="미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요"><button type="button" class="short-poster" aria-label="영상 재생: 미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요"><img src="https://i.ytimg.com/vi/9bHlRVCoR3w/hqdefault.jpg" alt="" width="360" height="640" decoding="async"><span class="short-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span></button></div><div class="short-side"><div class="short-top"><span class="issue-badge">최신 영상</span><span class="short-when">2026년 11월 23일</span><span class="chip">Part 1</span></div><h3 class="short-title">미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요</h3><p class="short-desc">초과근무 수당에 세금이 없다는데, 정확히 어느 부분이 공제될까요?</p><div class="short-actions"><a class="btn btn-primary" href="https://www.youtube.com/@PracExam-EA/shorts" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> YouTube에서 쇼츠 전체 보기</a></div><div class="short-past"><div class="archive-head">지난 영상</div><a class="short-row" href="https://www.youtube.com/shorts/0cVJgFBKiy4" target="_blank" rel="noopener"><span class="issue-date">11월 11일</span><span class="issue-name">미국 세무사 EA 시험: 팁 소득 공제, 한도는 얼마일까요</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="short-row" href="https://www.youtube.com/shorts/Mdquy_00D_A" target="_blank" rel="noopener"><span class="issue-date">11월 5일</span><span class="issue-name">IRS TAX TIP: 자동차 대출 이자도 세금 공제가 될까요?</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="short-row" href="https://www.youtube.com/shorts/Q5V2mI4GKTo" target="_blank" rel="noopener"><span class="issue-date">10월 27일</span><span class="issue-name">미국 세무사 EA 시험: CAF란 무엇일까요</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></div></div></div>
+                <div id="shorts-content"><div class="short-grid"><div class="short-frame" data-id="9bHlRVCoR3w" data-title="미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요"><button type="button" class="short-poster" aria-label="영상 재생: 미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요"><img src="https://i.ytimg.com/vi/9bHlRVCoR3w/hqdefault.jpg" alt="" width="360" height="640" decoding="async"><span class="short-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span></button></div><div class="short-side"><div class="short-top"><span class="issue-badge">최신 영상</span><span class="short-when">2026년 11월 23일</span><span class="chip">Part 1</span></div><h3 class="short-title">미국 세무사 EA 시험: 초과근무 수당 공제, 어디까지 될까요</h3><p class="short-desc">초과근무 수당에 세금이 없다는데, 정확히 어느 부분이 공제될까요?</p><div class="short-actions"><a class="btn btn-primary" href="https://pracexam.com/videos?lang=ko" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i> PracExam에서 영상 더 보기</a></div><div class="short-past"><div class="archive-head">지난 영상</div><a class="short-row" href="https://pracexam.com/videos?lang=ko" target="_blank" rel="noopener"><span class="issue-date">11월 11일</span><span class="issue-name">미국 세무사 EA 시험: 팁 소득 공제, 한도는 얼마일까요</span><i class="fa-solid fa-chevron-right"></i></a><a class="short-row" href="https://pracexam.com/videos?lang=ko" target="_blank" rel="noopener"><span class="issue-date">11월 5일</span><span class="issue-name">IRS TAX TIP: 자동차 대출 이자도 세금 공제가 될까요?</span><i class="fa-solid fa-chevron-right"></i></a><a class="short-row" href="https://pracexam.com/videos?lang=ko" target="_blank" rel="noopener"><span class="issue-date">10월 27일</span><span class="issue-name">미국 세무사 EA 시험: CAF란 무엇일까요</span><i class="fa-solid fa-chevron-right"></i></a></div></div></div></div>
             </div>
         </section>
 
@@ -690,7 +691,7 @@
                         <ul class="about-list">
                             <li><i class="fa-solid fa-newspaper"></i> 매주 IRS 소식을 한국어로 정리</li>
                             <li><i class="fa-solid fa-book-open"></i> 시험 준비 가이드와 블로그</li>
-                            <li><i class="fa-brands fa-youtube"></i> 1분 실전 문제 쇼츠</li>
+                            <li><i class="fa-brands fa-youtube"></i> EA 실전 문제 풀이 쇼츠</li>
                             <li><i class="fa-solid fa-comments"></i> 네이버 카페에서 질문과 정보 나누기</li>
                         </ul>
                         <div class="about-links">
